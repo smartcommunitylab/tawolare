@@ -8,6 +8,8 @@
     <li><a href="#api8" data-toggle="tab">elenco comuni catastali</a></li>
     <li><a href="#api7" data-toggle="tab">dati da codice particella e codice comune catastale</a></li>
     <li><a href="#api6" data-toggle="tab">particella catastale da foto con geotag</a></li>
+    <li><a href="#api9" data-toggle="tab">comprensorio da codice identificativo</a></li>
+    <li><a href="#api10" data-toggle="tab">comunità di valle da codice identificativo</a></li>
 </ul>
 
 <div id="tab-apicontent" class="tab-content">
@@ -93,7 +95,7 @@ Il geojson contiene la poligonale della particella e i seguenti attributi:
 	<h2>comune catastale da codice univoco</h2>  
   	<h3>endpoint</h3>
         <div class="well well-sm"><span style="font-family: courier">{{servername}}api/comune/catastale/<em>id</em></span></div>
-	<p>restistuisce un geojson con il comune catastale corrispondente al codice catastale univoco</p>
+	<p>Restistuisce un geojson con il comune catastale corrispondente al codice catastale univoco. È possibile ottenere più comuni separando gli id con virgole.</p>
 	<h3>esempio</h3>
 	<div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}api/comune/catastale/116">{{servername}}api/comune/catastale/116</a></div>
 	</div>
@@ -101,7 +103,7 @@ Il geojson contiene la poligonale della particella e i seguenti attributi:
 	<h2>comune amministrativo da codice univoco</h2>
         <h3>endpoint</h3>
         <div class="well well-sm"><span style="font-family: courier">{{servername}}api/comune/catastale/<em>id</em></span></div>
-        <p>restistuisce un geojson con il comune amministrativo corrispondente al codice amministrativo univoco</p>
+        <p>Restistuisce un geojson con il comune amministrativo corrispondente al codice amministrativo univoco. È possibile ottenere più comuni separando gli id con virgole.</p>
         <h3>esempio</h3>
         <div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}api/comune/amministrativo/116">{{servername}}api/comune/amministrativo/116</a></div>
         </div>
@@ -117,9 +119,9 @@ Il geojson contiene la poligonale della particella e i seguenti attributi:
 	        <h2>dati da codice particella e codice comune catastale</h2>
             <h3>endpoint</h3>
             <div class="well well-sm"><span style="font-family: courier">{{servername}}api/trovaparticella/?idcomune=<em>codice catastale</em>&numparticella=<em>numero particella</em></span></div>
-            <p>restistuisce un geojson le geometrie e i dati corrispondenti a particella e codice catastale forniti</p>
+            <p>Restistuisce un geojson con le geometrie e i dati corrispondenti alle particelle con l'id specificato contenute nel comune specificato. È possibile richiedere le particelle corrispondenti a più id separandoli con virgole. Il comune può essere uno solo.</p>
             <h3>esempio</h3>
-            <div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}api/trovaparticella?idcomune=105&numparticella=.135">{{servername}}api/trovaparticella??idcomune=105&numparticella=.135</a></div>
+            <div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}api/trovaparticella?idcomune=105&numparticella=.135">{{servername}}api/trovaparticella?idcomune=105&numparticella=.135</a></div>
         </div>
         <div class="tab-pane" id="api8">
 	        <h2>elenco comuni catastali</h2>
@@ -128,6 +130,22 @@ Il geojson contiene la poligonale della particella e i seguenti attributi:
             <p>restistuisce un json con i codici dei comuni catastali e relativo nome</p>
             <h3>esempio</h3>
             <div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}api/comune/catastale/lista">{{servername}}api/comune/catastale/lista</a></div>
+        </div>
+        <div class="tab-pane" id="api9">
+            <h2>comprensorio da codice univoco</h2>  
+            <h3>endpoint</h3>
+            <div class="well well-sm"><span style="font-family: courier">{{servername}}api/comprensorio/<em>id</em></span></div>
+            <p>Restistuisce un geojson con il comprensorio corrispondente al codice univoco. È possibile ottenere più comprensori separando gli id con virgole.</p>
+            <h3>esempio</h3>
+            <div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}api/comprensorio/6">{{servername}}api/comprensorio/6</a></div>
+        </div>
+        <div class="tab-pane" id="api10">
+            <h2>comunità di valle da codice univoco</h2>  
+            <h3>endpoint</h3>
+            <div class="well well-sm"><span style="font-family: courier">{{servername}}api/comunitadivalle/<em>id</em></span></div>
+            <p>Restistuisce un geojson con la comunità di valle corrispondente al codice univoco. È possibile ottenere più comunità di valle separando gli id con virgole.</p>
+            <h3>esempio</h3>
+            <div class="well well-sm"><span style="font-family: courier"><a target="_new" href="{{servername}}api/comunitadivalle/6">{{servername}}api/comunitadivalle/6</a></div>
         </div>
     </div>
 </div>
