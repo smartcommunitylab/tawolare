@@ -61,7 +61,8 @@ def show_ip():
 
 @app.route('/api/particella/<y>/<x>')
 def particella(x,y):
-    response.content_type = 'application/json'
+    if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
+        response.content_type = 'application/json'
     try:
         catasto = Catasto()
         landParcel = catasto.findLandParcel(x,y)  
@@ -71,10 +72,8 @@ def particella(x,y):
 
 @app.route('/api/trovaparticella')
 def trovaparticella():
-    if request.get_header('Accept'):
-        print('Get header: {0}'.format(request.get_header('Accept')))
-    #if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
-    response.content_type = 'application/json'
+    if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
+        response.content_type = 'application/json'
     try:
         ccat = request.query['idcomune']
         nums = request.query['numparticella'].split(',')
@@ -92,7 +91,8 @@ def trovaparticella():
 
 @app.route('/api/comune/amministrativo/<ids>')
 def nametownship(ids):
-    response.content_type = 'application/json'
+    if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
+        response.content_type = 'application/json'
     catasto = Catasto()
     townships = []
     idgeom = 0
@@ -103,14 +103,16 @@ def nametownship(ids):
 
 @app.route('/api/comune/amministrativo/<y>/<x>')
 def township(x,y):
-    response.content_type = 'application/json'
+    if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
+        response.content_type = 'application/json'
     catasto = Catasto()
     township = catasto.findGeoTownship(x,y)
     return township
 
 @app.route('/api/comune/catastale/<ids>')
 def namecadastry(ids):
-    response.content_type = 'application/json'
+    if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
+        response.content_type = 'application/json'
     catasto = Catasto()
     cadastries = []
     idgeom = 0
@@ -121,7 +123,8 @@ def namecadastry(ids):
 
 @app.route('/api/comune/catastale/<y>/<x>')
 def findcadastry(x,y):
-    response.content_type = 'application/json'
+    if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
+        response.content_type = 'application/json'
     catasto = Catasto()
     cadastries = catasto.findGeoCadastry(x,y)
     return cadastries
@@ -137,7 +140,8 @@ def error404(error):
 
 @app.route('/api/comune/catastale/lista',method='GET')
 def getCadastryTownships():
-    response.content_type = 'application/json'
+    if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
+        response.content_type = 'application/json'
     catasto = Catasto()
     cadastries = catasto.listCadastryTownships()
     return json.dumps(cadastries, ensure_ascii=False).encode('utf-8')
@@ -168,7 +172,8 @@ def do_upload():
 
 @app.route('/api/comprensorio/<ids>')
 def getComprensorio(ids):
-    response.content_type = 'application/json'
+    if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
+        response.content_type = 'application/json'
     catasto = Catasto()
     comprensori = []
     idgeom = 0
@@ -179,7 +184,8 @@ def getComprensorio(ids):
 
 @app.route('/api/comunitadivalle/<ids>')
 def getCValle(ids):
-    response.content_type = 'application/json'
+    if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
+        response.content_type = 'application/json'
     catasto = Catasto()
     cvalle = []
     idgeom = 0
