@@ -23,7 +23,7 @@ THE SOFTWARE.
 
 from catastodb import Catasto
 from gpsphoto import Photo
-from bottle import Bottle, view, request, template,  static_file
+from bottle import Bottle, view, request, response, template,  static_file
 import os
 import json
 app =Bottle()
@@ -61,6 +61,7 @@ def show_ip():
 
 @app.route('/api/particella/<y>/<x>')
 def particella(x,y):
+    response.content_type = 'application/json'
     try:
         catasto = Catasto()
         landParcel = catasto.findLandParcel(x,y)  
@@ -70,42 +71,57 @@ def particella(x,y):
 
 @app.route('/api/trovaparticella')
 def trovaparticella():
+    if request.get_header('Accept'):
+        print('Get header: {0}'.format(request.get_header('Accept')))
+    #if request.get_header('Accept') and request.get_header('Accept') == 'application/json':
+    response.content_type = 'application/json'
     try:
         ccat = request.query['idcomune']
-        num = request.query['numparticella']
+        nums = request.query['numparticella'].split(',')
         catasto = Catasto()
-        result = catasto.findLandParcelbyId(num,ccat)
-        return catasto.joinGeoJSON(result)
+        parcels = []
+        for num in nums:
+            parcels += catasto.findLandParcelbyId(num,ccat)
+        idgeom = 0
+        for parcel in parcels:
+            parcel['geometry']['id'] = idgeom
+            idgeom += 1
+        return catasto.joinGeoJSON(parcels)
     except Exception as e:
         return e
 
-@app.route('/api/comune/amministrativo/<id>')
-def nametownship(id):
+@app.route('/api/comune/amministrativo/<ids>')
+def nametownship(ids):
+    response.content_type = 'application/json'
     catasto = Catasto()
-    return catasto.nameGeoTowhship(id)
+    townships = []
+    idgeom = 0
+    for id in ids.split(','):
+        townships += catasto.nameGeoTowhship(id,idgeom)
+        idgeom += 1
+    return catasto.joinGeoJSON(townships)
 
 @app.route('/api/comune/amministrativo/<y>/<x>')
 def township(x,y):
+    response.content_type = 'application/json'
     catasto = Catasto()
     township = catasto.findGeoTownship(x,y)
     return township
 
-@app.route('/api/comune/catastale/<id>')
-def namecadastry(id):
+@app.route('/api/comune/catastale/<ids>')
+def namecadastry(ids):
+    response.content_type = 'application/json'
     catasto = Catasto()
-    name = catasto.dataCadastryTownship(id)
-    amm = catasto.nameTownship(name[0][1])
-    d = {
-    'id_amministrativo':name[0][1],
-    'comune_amministrativo': amm[0][0],
-    'comune_catastale': name[0][0],
-    'centroidX': name[0][2],
-    'centroidY': name[0][3],
-    'id_comune_catastale':id}
-    return json.dumps(d)
+    cadastries = []
+    idgeom = 0
+    for id in ids.split(','):
+        cadastries += catasto.findGeoCadastryById(id,idgeom)
+        idgeom += 1
+    return catasto.joinGeoJSON(cadastries)
 
 @app.route('/api/comune/catastale/<y>/<x>')
 def findcadastry(x,y):
+    response.content_type = 'application/json'
     catasto = Catasto()
     cadastries = catasto.findGeoCadastry(x,y)
     return cadastries
@@ -121,9 +137,10 @@ def error404(error):
 
 @app.route('/api/comune/catastale/lista',method='GET')
 def getCadastryTownships():
+    response.content_type = 'application/json'
     catasto = Catasto()
     cadastries = catasto.listCadastryTownships()
-    return json.dumps(cadastries)
+    return json.dumps(cadastries, ensure_ascii=False).encode('utf-8')
 
 @app.route('/api/upload', method='POST')
 def do_upload():
@@ -148,6 +165,28 @@ def do_upload():
             geoposition.append(p)
         geoposition = catasto.joinGeoJSON(geoposition)
     return str(geoposition)
+
+@app.route('/api/comprensorio/<ids>')
+def getComprensorio(ids):
+    response.content_type = 'application/json'
+    catasto = Catasto()
+    comprensori = []
+    idgeom = 0
+    for id in ids.split(','):
+        comprensori += catasto.findComprensorioById(id,idgeom)
+        idgeom += 1
+    return catasto.joinGeoJSON(comprensori)
+
+@app.route('/api/comunitadivalle/<ids>')
+def getCValle(ids):
+    response.content_type = 'application/json'
+    catasto = Catasto()
+    cvalle = []
+    idgeom = 0
+    for id in ids.split(','):
+        cvalle += catasto.findCValleById(id,idgeom)
+        idgeom += 1
+    return catasto.joinGeoJSON(cvalle)
 
         
 @app.route("/")
