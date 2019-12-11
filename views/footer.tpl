@@ -1,4 +1,4 @@
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="www/js/bootstrap.min.js"></script>
     <script src="www/js/bootstrap-typeahead.min.js" type="text/javascript"></script>
     <script src="www/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
@@ -10,7 +10,7 @@
     <script src="www/js/l.geosearch.provider.openstreetmap.js"></script>
     <script src="www/js/leaflet-hash.js"></script>
     <script src="www/L.Control.Locate.min.js"></script>
-    <script src="www/easy-button.js"></script> 
+    <script src="www/easy-button.js"></script>
     <script src="www/Leaflet.Coordinates-0.1.5.min.js"></script>
 <!--    <script src="www/leaflet-measure.js"></script>-->
     <script src="www/js/FileSaver.min.js"></script>
@@ -50,7 +50,7 @@ body {
       </div>
       <div class="modal-body">
       <div class="alert alert-warning" role="alert">
-       non è possibile fornire informazioni con dati dati inseriti 
+       non è possibile fornire informazioni con dati dati inseriti
        </div>
       </div>
       <div class="modal-footer">
