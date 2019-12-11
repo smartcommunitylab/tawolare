@@ -96,6 +96,8 @@ Le API restituiscono [geojson](http://geojson.org/)<br/>
 | http://servername/api/comune/amministrativo/*latitudine*/*longitudine* | informazioni comune amministrativo latitudine e longitudine espresse in WGS84 | GET |
 | http://servername/api/comune/amministrativo/*id*| informazioni comune amministrativo da identificativo univoco | GET |
 | http://servername/api/upload| informazioni particella da foto con geotag - l'immagine va inviata con la variabile *filename* | POST |
+| http://servername/api/comprensorio/*id*| informazioni comprensorio da identificativo univoco | GET |
+| http://servername/api/comunitadivalle/*id*| informazioni comunità di valle da identificativo univoco | GET |
 
 # ulteriori librerie utili
 ## gpsphoto.py
