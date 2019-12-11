@@ -81,7 +81,7 @@ def trovaparticella():
         catasto = Catasto()
         parcels = []
         for num in nums:
-            parcels += catasto.findLandParcelbyId(num,ccat)
+            parcels += catasto.findLandParcelbyId(num.strip(),ccat)
         idgeom = 0
         for parcel in parcels:
             parcel['geometry']['id'] = idgeom
@@ -97,7 +97,7 @@ def nametownship(ids):
     townships = []
     idgeom = 0
     for id in ids.split(','):
-        townships += catasto.nameGeoTowhship(id,idgeom)
+        townships += catasto.nameGeoTowhship(id.strip(),idgeom)
         idgeom += 1
     return catasto.joinGeoJSON(townships)
 
@@ -115,7 +115,7 @@ def namecadastry(ids):
     cadastries = []
     idgeom = 0
     for id in ids.split(','):
-        cadastries += catasto.findGeoCadastryById(id,idgeom)
+        cadastries += catasto.findGeoCadastryById(id.strip(),idgeom)
         idgeom += 1
     return catasto.joinGeoJSON(cadastries)
 
@@ -173,7 +173,7 @@ def getComprensorio(ids):
     comprensori = []
     idgeom = 0
     for id in ids.split(','):
-        comprensori += catasto.findComprensorioById(id,idgeom)
+        comprensori += catasto.findComprensorioById(id.strip(),idgeom)
         idgeom += 1
     return catasto.joinGeoJSON(comprensori)
 
@@ -184,7 +184,7 @@ def getCValle(ids):
     cvalle = []
     idgeom = 0
     for id in ids.split(','):
-        cvalle += catasto.findCValleById(id,idgeom)
+        cvalle += catasto.findCValleById(id.strip(),idgeom)
         idgeom += 1
     return catasto.joinGeoJSON(cvalle)
 
