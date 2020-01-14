@@ -277,7 +277,6 @@ class Catasto():
         return parcels
 
     def findLandParcelbyId(self,num,codcc):
-        idgeom = 0
         idcat = str(codcc).zfill(3)
         ccat = "%s%s" % (idcat,self.ext_tablecadastry)
         parcels = []
@@ -304,8 +303,7 @@ class Catasto():
                 namecomu = self.nameTownship(dcat[0][1])[0][0]
                 properties['comune'] = namecomu
                 geometry = shapely.wkt.loads(fparcel[5])
-                parcel = geojson.Feature(geometry=geometry, id=idgeom,properties=properties)
-                idgeom += 1
+                parcel = geojson.Feature(geometry=geometry, properties=properties)
                 parcels.append(parcel)
         return parcels
 

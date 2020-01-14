@@ -84,6 +84,7 @@ def trovaparticella():
         idgeom = 0
         for parcel in parcels:
             parcel['geometry']['id'] = idgeom
+            parcel['id'] = idgeom
             idgeom += 1
         return catasto.joinGeoJSON(parcels)
     except Exception as e:
